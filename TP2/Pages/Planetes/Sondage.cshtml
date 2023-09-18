@@ -1,0 +1,96 @@
+﻿@page
+@model TP2.Pages.Planetes.SondageModel
+@{
+    ViewData["Title"] = "Sondage";
+}
+@inject IViewLocalizer ViewLocalizer
+
+<div class="sondage">
+    <h1 style="text-align:center">@ViewLocalizer["TitrePage"]!</h1>
+        <form method="post" asp-page="/Pages/Planetes/Sondage" style="padding:5px;">
+            @if(Model.SondageViewModel.Validation == true)
+            {
+            <div style="margin-left:10px; background-color:palegreen;width:90%;height:50px;border-radius:5px;">
+                <p style="color:forestgreen; margin-left:10px;margin-top:auto">Votre sondage a été envoyé!</p>
+            </div>
+            }
+            <div id="alerte" asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="row">
+                <div class="col-4">
+                    <label class="form-label"><b>@ViewLocalizer["Prénom"]</b></label>
+                    <input type="text" asp-for="SondageViewModel.Prénom" class="form-control">
+                    <span class="text-danger" asp-validation-for="SondageViewModel.Prénom"></span>
+                </div>
+                <div class="col-4">
+                <label for="PlanètePréférée" style="margin-bottom:8px;"><b>@ViewLocalizer["Favorite"]:</b></label>
+                    <select class="form-control" id="PlanètePréférée" asp-for="SondageViewModel.planètechoisie" style="margin-bottom:19px;">     
+                       
+                    @foreach (var planete in Model.SondageViewModel.liste_planetes)
+                    {
+                        <option>@planete</option>
+                    }
+                    </select>
+                </div>
+                <div class="col-4">
+                <div class="form-group">
+                    <label class="form-label"><b>@ViewLocalizer["DernièreVisite"]:</b></label>
+                    <input asp-for="SondageViewModel.DernièreVisite" class="form-control" />
+                    <span asp-validation-for="SondageViewModel.DernièreVisite" class="text-danger"></span>
+                </div>
+                </div>             
+            
+            </div>
+            <div class="row">
+                <div class="col-4">
+                  <label class="form-label"><b>@ViewLocalizer["Nom"]</b></label>
+                <input type="text" asp-for="SondageViewModel.Nom" class="form-control">
+                <span class="text-danger" asp-validation-for="SondageViewModel.Nom"></span>
+                </div>
+           
+                <div class="col-4" >
+                    <label for="niveaux"><b>@ViewLocalizer["NiveauConnaissance"]:</b></label>
+                    <input type="radio" asp-for="SondageViewModel.Niveau" value="Débutant" id="débutant"/>@ViewLocalizer["Débutant"]<br />
+                <input type="radio" asp-for="SondageViewModel.Niveau" value="Intermédiaire" id="intermédiaire" />@ViewLocalizer["Intermédiaire"]<br />
+                    <input type="radio" asp-for="SondageViewModel.Niveau" value="Avancé" id="avancé" />@ViewLocalizer["Avancé"]<br /> 
+                    <span class="text-danger" asp-validation-for="SondageViewModel.Niveau" style="margin-bottom: 10px;"></span>
+                </div>
+                    <div class="col-4">
+                <label class="form-label" for="commentaires"><b>@ViewLocalizer["Commentaire"]</b></label>
+                        <div>
+                            <textarea id="commentaires" class="form-control" cols="50" rows="4"></textarea>   <!--resize: none pour désactiver l'ajustement de la zone'-->
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                <label class="form-label"><b>@ViewLocalizer["Courriel"]</b></label>
+                <input type="email" asp-for="SondageViewModel.Email" class="form-control">
+                <span class="text-danger" asp-validation-for="SondageViewModel.Email"></span>
+                </div>
+                <div class="col-4">
+                    <div class="form-check">
+                        <input id="getinformed" asp-for="SondageViewModel.RecevoirNotification" class="form-check-input" type="checkbox" >
+                        <label class="form-check-label" for="getinformed"><b>@ViewLocalizer["GetInformed"]</b></label>
+                        <span class="text-danger" asp-validation-for="SondageViewModel.RecevoirNotification"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                <label class="form-label"><b>@ViewLocalizer["CodePromo"] (Ex: P123-SDHD-2E)</b></label>
+                <input type="text" asp-for="SondageViewModel.CodePromotion" class="form-control">
+                <span class="text-danger" asp-validation-for="SondageViewModel.CodePromotion"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+            <vc:pub date="2022/12/25" message="@ViewLocalizer["SoldeLivre"].Value"></vc:pub>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 mt-3" style="padding-top:10px;">.
+                    <button id="envoyer" class="btn btn-primary btn-dark"asp-route-action="@((int)SondageModel.ActionsPossible.Envoyer)">@ViewLocalizer["Envoyer"]</button>
+                    <button id="recommencer" class="btn btn-primary btn-dark" asp-route-action="@((int)SondageModel.ActionsPossible.Recommencer)">@ViewLocalizer["Recommencer"]</button>
+                </div>
+            </div>
+        </form>
+ </div>

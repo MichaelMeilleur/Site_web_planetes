@@ -1,0 +1,108 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-image: url("/Images/Solar_sys.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-item a {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.footer {
+    background-color: #6793d2;
+    border-radius: 8px;
+}
+
+    .footer .container {
+        color: black;
+        font-weight: bold;
+        font-size: 12px;
+        padding-bottom: 8px;
+    }
+
+.navbar-brand img {
+    width: 65px;
+    height: 50px
+}
+
+
+.cnt-accueil {
+    width: 2000px;
+    height: 1700px;
+    background-color: #c5d6ff;
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ligne {
+    display:flex;
+}
+
+.image-planete {
+    margin-left:30px;
+    height: 250px;
+    width: 250px;
+    border: 3px solid white;
+    background-color: black;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.image-planete-detail {
+    margin-top:15px;
+    margin-left: 50px;
+    height: 300px;
+    width: 300px;
+    border: 3px solid white;
+    background-color: black;
+}
+
+.case {
+    height: 350px;
+    width : 300px;
+    margin-left: 20px;
+    margin-top:130px;
+}
+
+.detail {
+    width: 1000px;
+    height: 700px;
+    background-color: #c5d6ff;
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sondage {
+    width: 1300px;
+    max-height: 700px;
+    background-color: #c5d6ff;
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.case1-detail{
+    margin-left:10px;
+    text-align:justify;
+    width:600px;
+}

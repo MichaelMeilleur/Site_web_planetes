@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures!
+    .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+    .ToList();
+}
+<div style="float:right" title="@Localizer["Request culture provider:"]
+ @requestCulture?.Provider?.GetType().Name">
+    <form id="selectLanguage" class="form-horizontal" role="form">
+        <label asp-for="@requestCulture!.RequestCulture.UICulture.Name">
+            <i class="fa-solid fa-earth-americas"></i>
+        </label>
+        <select name="culture"
+                onchange="form.submit();"
+                asp-for="@requestCulture!.RequestCulture.UICulture.Name"
+                asp-items="cultureItems">
+        </select>
+    </form>
+</div>

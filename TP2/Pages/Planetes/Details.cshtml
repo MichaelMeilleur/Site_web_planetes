@@ -1,0 +1,55 @@
+﻿@page "{noplanète}"
+@using TP2.Models;
+@model TP2.Pages.Planetes.DetailsModel
+@{
+}
+@inject IViewLocalizer ViewLocalizer
+
+<div class="detail" style="text-align:center">
+    <h1 style="text-align:center">@Model.Planète.Nom</h1>
+    <div class="ligne">
+        <div class="case1-detail">
+            <p>@Model.Planète.Description</p>
+            <div class="ligne">
+                <div>
+                    <h4>@ViewLocalizer["Informations"]</h4>
+                    <table class="table table-bordered" style="background-color:black;color:white">
+                        <tbody>
+                            <tr>
+                                <td>@ViewLocalizer["Numéro"]</td>
+                                <td>@Model.Planète.NoPlanète</td>
+                            </tr>
+                            <tr>
+                                <td>@ViewLocalizer["Révolution"]</td>
+                                <td>@Model.Planète.Révolution jours</td>
+                            </tr>
+                            <tr>
+                                <td>@ViewLocalizer["Satellites"]</td>
+                                <td>@Model.Planète.NbSatellites</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-left:60px">
+                    <h4>@ViewLocalizer["Caractéristiques"]</h4>
+                    @foreach (Caracteristique item in Model.Caracteristique!)
+                    {
+                        if (item.PlanèteID == Model.Planète.ID)
+                        {
+
+                            <p>@item.Catégorie : </p>                             
+                            
+                            <ul>
+                                <li>@item.Nom @item.Valeur @item.MesureHtml</li>
+                            </ul>
+                            
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div>
+            <img class="image-planete-detail" src="data:@Model.Planète.Image.Type;base64,@Convert.ToBase64String(Model.Planète.Image.Data!)" atl="@Model.Planète.Image.Nom" />
+        </div>
+    </div>
+</div>
